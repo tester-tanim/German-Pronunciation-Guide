@@ -1,0 +1,21 @@
+{
+  "name": "German Pronunciation Guide",
+  "short_name": "German Pronunciation",
+  "description": "Learn German pronunciation with letters, numbers, and phrases",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#3498db",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/german-app/192/192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://picsum.photos/seed/german-app/512/512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>German Pronunciation Guide</title>
+    <meta name="description" content="Learn German pronunciation with letters, numbers, and phrases">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="German Pronunciation">
+    <link rel="apple-touch-icon" href="https://picsum.photos/seed/german-app/192/192.jpg">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+            z-index: 90;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .tab:hover {
+            background-color: var(--light);
+        }
+        
+        .tab.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+        
+        .card p {
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .play-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .play-btn:hover {
+            background-color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .play-btn.playing {
+            background-color: var(--accent);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .phrase-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .phrase-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .phrase-text {
+            flex: 1;
+        }
+        
+        .phrase-text h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+        
+        .phrase-text p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .custom-item {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .remove-btn:hover {
+            opacity: 1;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-width: 80%;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification.error {
+            background-color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+        }
+        
+        .audio-controls {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .audio-controls button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .audio-controls button:hover {
+            background-color: var(--primary);
+        }
+        
+        .input-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .input-container input {
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .input-container button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .input-container button:hover {
+            background-color: var(--primary);
+        }
+        
+        .input-container .tertiary-btn {
+            background-color: var(--warning);
+        }
+        
+        .input-container .tertiary-btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .translation-loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .feature-highlight {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .feature-highlight h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .feature-highlight p {
+            font-size: 0.9rem;
+        }
+        
+        .install-banner {
+            background-color: var(--warning);
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .install-banner button {
+            background-color: white;
+            color: var(--warning);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .install-banner .close-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="install-banner" class="install-banner" style="display: none;">
+        <div>
+            <i class="fas fa-mobile-alt"></i> Install this app on your device for offline use
+        </div>
+        <button id="install-button">Install</button>
+        <button class="close-btn" id="close-install-banner">&times;</button>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>German Pronunciation Guide</h1>
+            <p>Learn how to pronounce German letters, numbers, and phrases</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="alphabet">Alphabet</div>
+            <div class="tab" data-tab="numbers">Numbers</div>
+            <div class="tab" data-tab="phrases">Basic Phrases</div>
+        </div>
+
+        <div class="content">
+            <!-- Alphabet Tab -->
+            <div id="alphabet" class="tab-content active">
+                <h2>German Alphabet (A-Z)</h2>
+                <p>Click on any letter to hear its pronunciation in German</p>
+                
+                <div class="audio-controls">
+                    <button id="play-all-alphabet"><i class="fas fa-play"></i> Play All</button>
+                    <button id="stop-alphabet"><i class="fas fa-stop"></i> Stop</button>
+                </div>
+                
+                <div class="input-container">
+                    <input type="text" id="alphabet-input" placeholder="Enter a German letter or word...">
+                    <button id="add-alphabet"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                
+                <div class="grid-container" id="alphabet-grid">
+                    <!-- Alphabet cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Numbers Tab -->
+            <div id="numbers" class="tab-content">
+                <h2>German Numbers (1-99)</h2>
+                <p>Click on any number to hear its pronunciation in German</p>
+                
+                <div class="audio-controls">
+                    <button id="play-all-numbers"><i class="fas fa-play"></i> Play All (1-20)</button>
+                    <button id="stop-numbers"><i class="fas fa-stop"></i> Stop</button>
+                </div>
+                
+                <div class="input-container">
+                    <input type="text" id="numbers-input" placeholder="Enter a German number...">
+                    <button id="add-numbers"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                
+                <div class="grid-container" id="numbers-grid">
+                    <!-- Number cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Phrases Tab -->
+            <div id="phrases" class="tab-content">
+                <h2>Basic German Phrases</h2>
+                <p>Click on any phrase to hear its pronunciation in German</p>
+                
+                <div class="feature-highlight">
+                    <h3><i class="fas fa-lightbulb"></i> New Feature</h3>
+                    <p>Enter an English word or phrase and we'll automatically generate the German translation!</p>
+                </div>
+                
+                <div class="audio-controls">
+                    <button id="play-all-phrases"><i class="fas fa-play"></i> Play All</button>
+                    <button id="stop-phrases"><i class="fas fa-stop"></i> Stop</button>
+                </div>
+                
+                <div class="input-container">
+                    <input type="text" id="english-input" placeholder="Enter English word or phrase...">
+                    <input type="text" id="german-output" placeholder="German translation will appear here..." readonly>
+                    <button id="translate-btn" class="tertiary-btn"><i class="fas fa-language"></i> Generate German</button>
+                    <button id="add-phrase"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                
+                <div id="phrases-container">
+                    <!-- Phrase cards will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 German Pronunciation Guide | Created for language learners</p>
+        </div>
+    </footer>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-volume-up"></i> Playing pronunciation...
+    </div>
+
+    <script>
+        // German alphabet data
+        const germanAlphabet = [
+            { letter: 'A', pronunciation: 'ah' },
+            { letter: 'B', pronunciation: 'bay' },
+            { letter: 'C', pronunciation: 'tsay' },
+            { letter: 'D', pronunciation: 'day' },
+            { letter: 'E', pronunciation: 'eh' },
+            { letter: 'F', pronunciation: 'ef' },
+            { letter: 'G', pronunciation: 'gay' },
+            { letter: 'H', pronunciation: 'hah' },
+            { letter: 'I', pronunciation: 'ee' },
+            { letter: 'J', pronunciation: 'yot' },
+            { letter: 'K', pronunciation: 'kah' },
+            { letter: 'L', pronunciation: 'el' },
+            { letter: 'M', pronunciation: 'em' },
+            { letter: 'N', pronunciation: 'en' },
+            { letter: 'O', pronunciation: 'oh' },
+            { letter: 'P', pronunciation: 'pay' },
+            { letter: 'Q', pronunciation: 'koo' },
+            { letter: 'R', pronunciation: 'air' },
+            { letter: 'S', pronunciation: 'es' },
+            { letter: 'T', pronunciation: 'tay' },
+            { letter: 'U', pronunciation: 'oo' },
+            { letter: 'V', pronunciation: 'fow' },
+            { letter: 'W', pronunciation: 'vay' },
+            { letter: 'X', pronunciation: 'ix' },
+            { letter: 'Y', pronunciation: 'ipsilon' },
+            { letter: 'Z', pronunciation: 'tset' },
+            { letter: 'Ä', pronunciation: 'eh' },
+            { letter: 'Ö', pronunciation: 'er' },
+            { letter: 'Ü', pronunciation: 'oo' },
+            { letter: 'ß', pronunciation: 'ess-tset' }
+        ];
+
+        // German numbers data (1-99)
+        const germanNumbers = [];
+        for (let i = 1; i <= 99; i++) {
+            germanNumbers.push({
+                number: i,
+                german: getGermanNumber(i)
+            });
+        }
+
+        function getGermanNumber(num) {
+            const units = ['', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun'];
+            const teens = ['zehn', 'elf', 'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'];
+            const tens = ['', '', 'zwanzig', 'dreißig', 'vierzig', 'fünfzig', 'sechzig', 'siebzig', 'achtzig', 'neunzig'];
+            
+            if (num === 1) return 'eins';
+            if (num < 10) return units[num];
+            if (num < 20) return teens[num - 10];
+            
+            const ten = Math.floor(num / 10);
+            const unit = num % 10;
+            
+            if (unit === 0) return tens[ten];
+            return `${units[unit]}und${tens[ten]}`;
+        }
+
+        // German phrases data
+        const germanPhrases = [
+            { german: 'Hallo', english: 'Hello' },
+            { german: 'Guten Morgen', english: 'Good morning' },
+            { german: 'Guten Tag', english: 'Good afternoon' },
+            { german: 'Guten Abend', english: 'Good evening' },
+            { german: 'Auf Wiedersehen', english: 'Goodbye' },
+            { german: 'Bitte', english: 'Please / You\'re welcome' },
+            { german: 'Danke', english: 'Thank you' },
+            { german: 'Ja', english: 'Yes' },
+            { german: 'Nein', english: 'No' },
+            { german: 'Entschuldigung', english: 'Excuse me / Sorry' },
+            { german: 'Wie heißen Sie?', english: 'What is your name?' },
+            { german: 'Ich heiße...', english: 'My name is...' },
+            { german: 'Wie geht es Ihnen?', english: 'How are you?' },
+            { german: 'Mir geht es gut', english: 'I am fine' },
+            { german: 'Sprechen Sie Englisch?', english: 'Do you speak English?' },
+            { german: 'Ich verstehe nicht', english: 'I don\'t understand' },
+            { german: 'Wo ist die Toilette?', english: 'Where is the toilet?' },
+            { german: 'Wie viel kostet das?', english: 'How much does this cost?' },
+            { german: 'Hilfe!', english: 'Help!' },
+            { german: 'Zum Wohl!', english: 'Cheers!' }
+        ];
+
+        // English to German dictionary
+        const englishToGermanDict = {
+            // Common words
+            'i': 'ich',
+            'you': 'du',
+            'he': 'er',
+            'she': 'sie',
+            'it': 'es',
+            'we': 'wir',
+            'they': 'sie',
+            'the': 'der/die/das',
+            'a': 'ein',
+            'an': 'ein',
+            'is': 'ist',
+            'are': 'sind',
+            'have': 'habe',
+            'has': 'hat',
+            'can': 'kann',
+            'want': 'will',
+            'should': 'soll',
+            'must': 'muss',
+            'not': 'nicht',
+            'and': 'und',
+            'or': 'oder',
+            'but': 'aber',
+            'because': 'weil',
+            'when': 'wenn',
+            'that': 'dass',
+            'to': 'zu',
+            'in': 'in',
+            'on': 'auf',
+            'at': 'an',
+            'with': 'mit',
+            'from': 'von',
+            'for': 'für',
+            'without': 'ohne',
+            'around': 'um',
+            'here': 'hier',
+            'there': 'dort',
+            'where': 'wo',
+            'what': 'was',
+            'who': 'wer',
+            'how': 'wie',
+            'why': 'warum',
+            'which': 'welcher',
+            'this': 'dies',
+            'that': 'jener',
+            'all': 'alle',
+            'many': 'viele',
+            'some': 'einige',
+            'few': 'wenige',
+            'other': 'anderer',
+            'same': 'gleich',
+            'good': 'gut',
+            'bad': 'schlecht',
+            'big': 'groß',
+            'small': 'klein',
+            'new': 'neu',
+            'old': 'alt',
+            'young': 'jung',
+            'beautiful': 'schön',
+            'ugly': 'hässlich',
+            'long': 'lang',
+            'short': 'kurz',
+            'high': 'hoch',
+            'low': 'niedrig',
+            'warm': 'warm',
+            'cold': 'kalt',
+            'hot': 'heiß',
+            'easy': 'leicht',
+            'difficult': 'schwer',
+            'fast': 'schnell',
+            'slow': 'langsam',
+            'early': 'früh',
+            'late': 'spät',
+            'today': 'heute',
+            'tomorrow': 'morgen',
+            'yesterday': 'gestern',
+            'now': 'jetzt',
+            'then': 'dann',
+            'later': 'später',
+            'immediately': 'sofort',
+            'soon': 'bald',
+            'sometimes': 'manchmal',
+            'often': 'oft',
+            'rarely': 'selten',
+            'always': 'immer',
+            'never': 'nie',
+            'yes': 'ja',
+            'no': 'nein',
+            'please': 'bitte',
+            'thank you': 'danke',
+            'hello': 'hallo',
+            'bye': 'tschüss',
+            'goodbye': 'auf wiedersehen',
+            'good morning': 'guten morgen',
+            'good day': 'guten tag',
+            'good afternoon': 'guten tag',
+            'good evening': 'guten abend',
+            'good night': 'gute nacht',
+            'how are you': 'wie geht es dir',
+            'i am fine': 'mir geht es gut',
+            'excuse me': 'entschuldigung',
+            'what is your name': 'wie heißen sie',
+            'my name is': 'ich heiße',
+            'where are you from': 'woher kommst du',
+            'i come from': 'ich komme aus',
+            'do you speak english': 'sprichst du englisch',
+            'i don\'t speak german': 'ich spreche kein deutsch',
+            'can you help me': 'kannst du mir helfen',
+            'i don\'t understand': 'ich verstehe nicht',
+            'can you repeat that': 'können sie das wiederholen',
+            'what does that mean': 'was bedeutet das',
+            'how much is this': 'wie viel kostet das',
+            'i would like to buy this': 'ich möchte das kaufen',
+            'where is the toilet': 'wo ist die toilette',
+            'i am hungry': 'ich habe hunger',
+            'i am thirsty': 'ich habe durst',
+            'that tastes good': 'das schmeckt gut',
+            'cheers': 'zum wohl',
+            'help': 'hilfe',
+            'doctor': 'arzt',
+            'hospital': 'krankenhaus',
+            'police': 'polizei',
+            'restaurant': 'restaurant',
+            'hotel': 'hotel',
+            'train station': 'bahnhof',
+            'airport': 'flughafen',
+            'left': 'links',
+            'right': 'rechts',
+            'straight ahead': 'geradeaus',
+            'water': 'wasser',
+            'food': 'essen',
+            'bread': 'brot',
+            'milk': 'milch',
+            'coffee': 'kaffee',
+            'tea': 'tee',
+            'beer': 'bier',
+            'wine': 'wein',
+            'meat': 'fleisch',
+            'fish': 'fisch',
+            'vegetables': 'gemüse',
+            'fruit': 'obst',
+            'apple': 'apfel',
+            'banana': 'banane',
+            'orange': 'orange',
+            'book': 'buch',
+            'pen': 'stift',
+            'paper': 'papier',
+            'computer': 'computer',
+            'phone': 'telefon',
+            'car': 'auto',
+            'bicycle': 'fahrrad',
+            'bus': 'bus',
+            'train': 'zug',
+            'airplane': 'flugzeug',
+            'house': 'haus',
+            'room': 'zimmer',
+            'door': 'tür',
+            'window': 'fenster',
+            'table': 'tisch',
+            'chair': 'stuhl',
+            'bed': 'bett',
+            'one': 'eins',
+            'two': 'zwei',
+            'three': 'drei',
+            'four': 'vier',
+            'five': 'fünf',
+            'six': 'sechs',
+            'seven': 'sieben',
+            'eight': 'acht',
+            'nine': 'neun',
+            'ten': 'zehn',
+            'monday': 'montag',
+            'tuesday': 'dienstag',
+            'wednesday': 'mittwoch',
+            'thursday': 'donnerstag',
+            'friday': 'freitag',
+            'saturday': 'samstag',
+            'sunday': 'sonntag',
+            'january': 'januar',
+            'february': 'februar',
+            'march': 'märz',
+            'april': 'april',
+            'may': 'mai',
+            'june': 'juni',
+            'july': 'juli',
+            'august': 'august',
+            'september': 'september',
+            'october': 'oktober',
+            'november': 'november',
+            'december': 'dezember',
+            'spring': 'frühling',
+            'summer': 'sommer',
+            'autumn': 'herbst',
+            'winter': 'winter',
+            'red': 'rot',
+            'blue': 'blau',
+            'green': 'grün',
+            'yellow': 'gelb',
+            'black': 'schwarz',
+            'white': 'weiß',
+            'gray': 'grau',
+            'brown': 'braun',
+            'pink': 'rosa',
+            'purple': 'lila',
+            'love': 'liebe',
+            'friend': 'freund',
+            'family': 'familie',
+            'mother': 'mutter',
+            'father': 'vater',
+            'brother': 'bruder',
+            'sister': 'schwester',
+            'son': 'sohn',
+            'daughter': 'tochter',
+            'child': 'kind',
+            'man': 'mann',
+            'woman': 'frau',
+            'boy': 'junge',
+            'girl': 'mädchen',
+            'dog': 'hund',
+            'cat': 'katze',
+            'bird': 'vogel',
+            'horse': 'pferd',
+            'cow': 'kuh',
+            'pig': 'schwein',
+            'sheep': 'schaf',
+            'work': 'arbeit',
+            'school': 'schule',
+            'university': 'universität',
+            'student': 'student',
+            'teacher': 'lehrer',
+            'money': 'geld',
+            'time': 'zeit',
+            'day': 'tag',
+            'week': 'woche',
+            'month': 'monat',
+            'year': 'jahr',
+            'hour': 'stunde',
+            'minute': 'minute',
+            'second': 'sekunde',
+            'morning': 'morgen',
+            'afternoon': 'nachmittag',
+            'evening': 'abend',
+            'night': 'nacht'
+        };
+
+        // Custom items storage
+        let customAlphabetItems = [];
+        let customNumberItems = [];
+        let customPhraseItems = [];
+
+        // Generate alphabet cards
+        function generateAlphabetCards() {
+            const alphabetGrid = document.getElementById('alphabet-grid');
+            alphabetGrid.innerHTML = '';
+            
+            // Add original alphabet items
+            germanAlphabet.forEach(item => {
+                const card = createAlphabetCard(item, false);
+                alphabetGrid.appendChild(card);
+            });
+            
+            // Add custom items
+            customAlphabetItems.forEach(item => {
+                const card = createAlphabetCard(item, true);
+                alphabetGrid.appendChild(card);
+            });
+            
+            // Show empty state if no items
+            if (germanAlphabet.length === 0 && customAlphabetItems.length === 0) {
+                alphabetGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-font"></i>
+                        <p>No items added yet. Add some German letters or words!</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create alphabet card
+        function createAlphabetCard(item, isCustom) {
+            const card = document.createElement('div');
+            card.className = `card ${isCustom ? 'custom-item' : ''}`;
+            card.innerHTML = `
+                ${isCustom ? '<button class="remove-btn" data-index="' + customAlphabetItems.indexOf(item) + '" data-type="alphabet"><i class="fas fa-times"></i></button>' : ''}
+                <h3>${item.letter || item.text}</h3>
+                <p>${item.pronunciation || ''}</p>
+                <button class="play-btn" data-text="${item.letter || item.text}" data-type="alphabet">
+                    <i class="fas fa-play"></i>
+                </button>
+            `;
+            return card;
+        }
+
+        // Generate number cards
+        function generateNumberCards() {
+            const numbersGrid = document.getElementById('numbers-grid');
+            numbersGrid.innerHTML = '';
+            
+            // Add original number items
+            germanNumbers.forEach(item => {
+                const card = createNumberCard(item, false);
+                numbersGrid.appendChild(card);
+            });
+            
+            // Add custom items
+            customNumberItems.forEach(item => {
+                const card = createNumberCard(item, true);
+                numbersGrid.appendChild(card);
+            });
+            
+            // Show empty state if no items
+            if (germanNumbers.length === 0 && customNumberItems.length === 0) {
+                numbersGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-hashtag"></i>
+                        <p>No items added yet. Add some German numbers!</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create number card
+        function createNumberCard(item, isCustom) {
+            const card = document.createElement('div');
+            card.className = `card ${isCustom ? 'custom-item' : ''}`;
+            card.innerHTML = `
+                ${isCustom ? '<button class="remove-btn" data-index="' + customNumberItems.indexOf(item) + '" data-type="numbers"><i class="fas fa-times"></i></button>' : ''}
+                <h3>${item.number || item.text}</h3>
+                <p>${item.german || ''}</p>
+                <button class="play-btn" data-text="${item.german || item.text}" data-type="numbers">
+                    <i class="fas fa-play"></i>
+                </button>
+            `;
+            return card;
+        }
+
+        // Generate phrase cards
+        function generatePhraseCards() {
+            const phrasesContainer = document.getElementById('phrases-container');
+            phrasesContainer.innerHTML = '';
+            
+            // Add original phrase items
+            germanPhrases.forEach(item => {
+                const card = createPhraseCard(item, false);
+                phrasesContainer.appendChild(card);
+            });
+            
+            // Add custom items
+            customPhraseItems.forEach(item => {
+                const card = createPhraseCard(item, true);
+                phrasesContainer.appendChild(card);
+            });
+            
+            // Show empty state if no items
+            if (germanPhrases.length === 0 && customPhraseItems.length === 0) {
+                phrasesContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <p>No phrases added yet. Add some German phrases!</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create phrase card
+        function createPhraseCard(item, isCustom) {
+            const card = document.createElement('div');
+            card.className = `phrase-card ${isCustom ? 'custom-item' : ''}`;
+            card.innerHTML = `
+                ${isCustom ? '<button class="remove-btn" data-index="' + customPhraseItems.indexOf(item) + '" data-type="phrases"><i class="fas fa-times"></i></button>' : ''}
+                <div class="phrase-text">
+                    <h3>${item.german}</h3>
+                    <p>${item.english || ''}</p>
+                </div>
+                <button class="play-btn" data-text="${item.german}" data-type="phrases">
+                    <i class="fas fa-play"></i>
+                </button>
+            `;
+            return card;
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Check if browser supports speech synthesis
+        function checkSpeechSupport() {
+            return 'speechSynthesis' in window;
+        }
+
+        // Play pronunciation using Web Speech API
+        function playPronunciation(text, type = 'single') {
+            const notification = document.getElementById('notification');
+            
+            if (!checkSpeechSupport()) {
+                notification.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Your browser does not support speech synthesis.';
+                notification.classList.add('error');
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.classList.remove('error');
+                    }, 300);
+                }, 3000);
+                return;
+            }
+            
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Create utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.9; // Slightly slower for better learning
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            // Show notification
+            notification.innerHTML = '<i class="fas fa-volume-up"></i> Playing pronunciation...';
+            notification.classList.add('show');
+            
+            // Event listeners
+            utterance.onstart = () => {
+                if (type === 'single') {
+                    // Update the specific button that was clicked
+                    const activeButton = document.querySelector('.play-btn.playing');
+                    if (activeButton) {
+                        const icon = activeButton.querySelector('i');
+                        icon.classList.remove('fa-play');
+                        icon.classList.add('fa-stop');
+                    }
+                }
+            };
+            
+            utterance.onend = () => {
+                notification.classList.remove('show');
+                
+                if (type === 'single') {
+                    // Reset the button
+                    const activeButton = document.querySelector('.play-btn.playing');
+                    if (activeButton) {
+                        activeButton.classList.remove('playing');
+                        const icon = activeButton.querySelector('i');
+                        icon.classList.remove('fa-stop');
+                        icon.classList.add('fa-play');
+                    }
+                }
+            };
+            
+            utterance.onerror = (event) => {
+                notification.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error playing pronunciation.';
+                notification.classList.add('error');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.classList.remove('error');
+                    }, 300);
+                }, 3000);
+                
+                if (type === 'single') {
+                    const activeButton = document.querySelector('.play-btn.playing');
+                    if (activeButton) {
+                        activeButton.classList.remove('playing');
+                        const icon = activeButton.querySelector('i');
+                        icon.classList.remove('fa-stop');
+                        icon.classList.add('fa-play');
+                    }
+                }
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Play all items in a category
+        function playAllItems(category) {
+            let items = [];
+            
+            switch(category) {
+                case 'alphabet':
+                    items = germanAlphabet.map(item => item.letter);
+                    break;
+                case 'numbers':
+                    // Only play first 20 numbers to avoid too long playback
+                    items = germanNumbers.slice(0, 20).map(item => item.german);
+                    break;
+                case 'phrases':
+                    items = germanPhrases.map(item => item.german);
+                    break;
+            }
+            
+            if (items.length === 0) return;
+            
+            // Create a sequence of utterances
+            let index = 0;
+            
+            function speakNext() {
+                if (index >= items.length) {
+                    // Reset play all button
+                    const playAllBtn = document.getElementById(`play-all-${category}`);
+                    if (playAllBtn) {
+                        playAllBtn.disabled = false;
+                        const icon = playAllBtn.querySelector('i');
+                        icon.classList.remove('fa-stop');
+                        icon.classList.add('fa-play');
+                    }
+                    return;
+                }
+                
+                const utterance = new SpeechSynthesisUtterance(items[index]);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                utterance.onend = () => {
+                    index++;
+                    setTimeout(speakNext, 500); // Small delay between items
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            }
+            
+            // Start speaking
+            speakNext();
+        }
+
+        // Stop all speech
+        function stopSpeech() {
+            window.speechSynthesis.cancel();
+            
+            // Reset all buttons
+            document.querySelectorAll('.play-btn.playing').forEach(btn => {
+                btn.classList.remove('playing');
+                const icon = btn.querySelector('i');
+                icon.classList.remove('fa-stop');
+                icon.classList.add('fa-play');
+            });
+            
+            // Reset play all buttons
+            document.querySelectorAll('[id^="play-all-"]').forEach(btn => {
+                btn.disabled = false;
+                const icon = btn.querySelector('i');
+                icon.classList.remove('fa-stop');
+                icon.classList.add('fa-play');
+            });
+            
+            // Hide notification
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        // Add custom alphabet item
+        function addCustomAlphabetItem() {
+            const input = document.getElementById('alphabet-input');
+            const text = input.value.trim();
+            
+            if (!text) {
+                showNotification('Please enter a letter or word', 'error');
+                return;
+            }
+            
+            customAlphabetItems.push({
+                text: text,
+                pronunciation: ''
+            });
+            
+            generateAlphabetCards();
+            input.value = '';
+            showNotification('Added to alphabet list');
+        }
+
+        // Add custom number item
+        function addCustomNumberItem() {
+            const input = document.getElementById('numbers-input');
+            const text = input.value.trim();
+            
+            if (!text) {
+                showNotification('Please enter a number', 'error');
+                return;
+            }
+            
+            customNumberItems.push({
+                text: text,
+                german: text
+            });
+            
+            generateNumberCards();
+            input.value = '';
+            showNotification('Added to numbers list');
+        }
+
+        // Add custom phrase item
+        function addCustomPhraseItem() {
+            const englishInput = document.getElementById('english-input');
+            const germanOutput = document.getElementById('german-output');
+            const english = englishInput.value.trim();
+            const german = germanOutput.value.trim();
+            
+            if (!english || !german) {
+                showNotification('Please enter English text and generate German translation', 'error');
+                return;
+            }
+            
+            customPhraseItems.push({
+                german: german,
+                english: english
+            });
+            
+            generatePhraseCards();
+            englishInput.value = '';
+            germanOutput.value = '';
+            showNotification('Added to phrases list');
+        }
+
+        // Remove custom item
+        function removeCustomItem(type, index) {
+            switch(type) {
+                case 'alphabet':
+                    customAlphabetItems.splice(index, 1);
+                    generateAlphabetCards();
+                    break;
+                case 'numbers':
+                    customNumberItems.splice(index, 1);
+                    generateNumberCards();
+                    break;
+                case 'phrases':
+                    customPhraseItems.splice(index, 1);
+                    generatePhraseCards();
+                    break;
+            }
+            showNotification('Item removed');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            
+            if (type === 'error') {
+                notification.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+                notification.classList.add('error');
+            } else {
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                notification.classList.remove('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        // Translate English to German
+        function translateEnglishToGerman() {
+            const englishInput = document.getElementById('english-input');
+            const germanOutput = document.getElementById('german-output');
+            const englishText = englishInput.value.trim();
+            
+            if (!englishText) {
+                showNotification('Please enter English text to translate', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const translateBtn = document.getElementById('translate-btn');
+            const originalBtnContent = translateBtn.innerHTML;
+            translateBtn.innerHTML = '<span class="translation-loading"></span> Generating...';
+            translateBtn.disabled = true;
+            
+            // Simulate translation delay
+            setTimeout(() => {
+                // Convert to lowercase for dictionary lookup
+                const lowerCaseText = englishText.toLowerCase();
+                
+                // Try to find exact match in dictionary
+                if (englishToGermanDict[lowerCaseText]) {
+                    germanOutput.value = englishToGermanDict[lowerCaseText];
+                } else {
+                    // Try to translate word by word
+                    const words = lowerCaseText.split(' ');
+                    const translatedWords = words.map(word => {
+                        // Remove punctuation for lookup
+                        const cleanWord = word.replace(/[.,!?;:]/g, '');
+                        return englishToGermanDict[cleanWord] || `[${word}]`;
+                    });
+                    
+                    // Reconstruct with original punctuation
+                    let translatedText = translatedWords.join(' ');
+                    
+                    // Capitalize first letter
+                    if (translatedText.length > 0) {
+                        translatedText = translatedText.charAt(0).toUpperCase() + translatedText.slice(1);
+                    }
+                    
+                    germanOutput.value = translatedText;
+                }
+                
+                // Reset button
+                translateBtn.innerHTML = originalBtnContent;
+                translateBtn.disabled = false;
+                
+                showNotification('German translation generated');
+            }, 800);
+        }
+
+        // PWA Installation
+        let deferredPrompt;
+        const installBanner = document.getElementById('install-banner');
+        const installButton = document.getElementById('install-button');
+        const closeInstallBanner = document.getElementById('close-install-banner');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Show the install banner
+            installBanner.style.display = 'flex';
+        });
+
+        installButton.addEventListener('click', () => {
+            // Hide the install banner
+            installBanner.style.display = 'none';
+            // Show the install prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    showNotification('App installed successfully');
+                } else {
+                    showNotification('App installation cancelled');
+                }
+                deferredPrompt = null;
+            });
+        });
+
+        closeInstallBanner.addEventListener('click', () => {
+            installBanner.style.display = 'none';
+        });
+
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+
+        // Add event listeners
+        document.addEventListener('click', (e) => {
+            // Play buttons
+            if (e.target.closest('.play-btn')) {
+                const button = e.target.closest('.play-btn');
+                const text = button.getAttribute('data-text');
+                const type = button.getAttribute('data-type');
+                
+                // Add playing animation
+                button.classList.add('playing');
+                
+                // Play pronunciation
+                playPronunciation(text, 'single');
+            }
+            
+            // Play all buttons
+            if (e.target.closest('#play-all-alphabet')) {
+                const button = e.target.closest('#play-all-alphabet');
+                button.disabled = true;
+                const icon = button.querySelector('i');
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-stop');
+                playAllItems('alphabet');
+            }
+            
+            if (e.target.closest('#play-all-numbers')) {
+                const button = e.target.closest('#play-all-numbers');
+                button.disabled = true;
+                const icon = button.querySelector('i');
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-stop');
+                playAllItems('numbers');
+            }
+            
+            if (e.target.closest('#play-all-phrases')) {
+                const button = e.target.closest('#play-all-phrases');
+                button.disabled = true;
+                const icon = button.querySelector('i');
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-stop');
+                playAllItems('phrases');
+            }
+            
+            // Stop buttons
+            if (e.target.closest('#stop-alphabet') || 
+                e.target.closest('#stop-numbers') || 
+                e.target.closest('#stop-phrases')) {
+                stopSpeech();
+            }
+            
+            // Add buttons
+            if (e.target.closest('#add-alphabet')) {
+                addCustomAlphabetItem();
+            }
+            
+            if (e.target.closest('#add-numbers')) {
+                addCustomNumberItem();
+            }
+            
+            if (e.target.closest('#add-phrase')) {
+                addCustomPhraseItem();
+            }
+            
+            // Translate button
+            if (e.target.closest('#translate-btn')) {
+                translateEnglishToGerman();
+            }
+            
+            // Remove buttons
+            if (e.target.closest('.remove-btn')) {
+                const button = e.target.closest('.remove-btn');
+                const type = button.getAttribute('data-type');
+                const index = parseInt(button.getAttribute('data-index'));
+                removeCustomItem(type, index);
+            }
+        });
+
+        // Handle Enter key in input fields
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                if (e.target.id === 'alphabet-input') {
+                    addCustomAlphabetItem();
+                } else if (e.target.id === 'numbers-input') {
+                    addCustomNumberItem();
+                } else if (e.target.id === 'english-input') {
+                    translateEnglishToGerman();
+                }
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            generateAlphabetCards();
+            generateNumberCards();
+            generatePhraseCards();
+            
+            // Check speech support on load
+            if (!checkSpeechSupport()) {
+                const notification = document.getElementById('notification');
+                notification.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Your browser does not support speech synthesis. Please try Chrome, Edge, or Safari.';
+                notification.classList.add('error');
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.classList.remove('error');
+                    }, 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

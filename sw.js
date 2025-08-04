@@ -2,10 +2,8 @@ const CACHE_NAME = 'german-pronunciation-v1';
 const urlsToCache = [
   './',
   './index.html',
-  './manifest.json',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://picsum.photos/seed/german-app/192/192.jpg',
-  'https://picsum.photos/seed/german-app/512/512.jpg'
+  './app.webmanifest',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
 // Install the service worker

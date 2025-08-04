@@ -437,6 +437,40 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+        
+        .number-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .number-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .number-input-row input {
+            flex: 1;
+        }
+        
+        .number-input-row button {
+            white-space: nowrap;
+        }
+        
+        .number-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 4px;
+        }
+        
+        .number-display span {
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -494,8 +528,20 @@
                 </div>
                 
                 <div class="input-container">
-                    <input type="text" id="numbers-input" placeholder="Enter a German number...">
-                    <button id="add-numbers"><i class="fas fa-plus"></i> Add</button>
+                    <div class="number-input-container">
+                        <div class="number-input-row">
+                            <input type="text" id="english-number-input" placeholder="Enter English number (e.g., 23 or twenty three)">
+                            <button id="translate-number-btn" class="tertiary-btn"><i class="fas fa-language"></i> Generate German</button>
+                        </div>
+                        <div class="number-input-row">
+                            <input type="text" id="german-number-output" placeholder="German translation will appear here..." readonly>
+                            <button id="add-numbers"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                        <div class="number-display" id="number-display" style="display: none;">
+                            <span>English:</span> <span id="display-english"></span>
+                            <span>German:</span> <span id="display-german"></span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="grid-container" id="numbers-grid">
@@ -534,7 +580,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 German Pronunciation Guide | Made By Ishtiaque Ahmed Tanim</p>
+            <p>© 2023 German Pronunciation Guide | Made By Ishtiaque Ahmed Tanim</p>
         </div>
     </footer>
 
@@ -799,6 +845,24 @@
             'eight': 'acht',
             'nine': 'neun',
             'ten': 'zehn',
+            'eleven': 'elf',
+            'twelve': 'zwölf',
+            'thirteen': 'dreizehn',
+            'fourteen': 'vierzehn',
+            'fifteen': 'fünfzehn',
+            'sixteen': 'sechzehn',
+            'seventeen': 'siebzehn',
+            'eighteen': 'achtzehn',
+            'nineteen': 'neunzehn',
+            'twenty': 'zwanzig',
+            'thirty': 'dreißig',
+            'forty': 'vierzig',
+            'fifty': 'fünfzig',
+            'sixty': 'sechzig',
+            'seventy': 'siebzig',
+            'eighty': 'achtzig',
+            'ninety': 'neunzig',
+            'hundred': 'hundert',
             'monday': 'montag',
             'tuesday': 'dienstag',
             'wednesday': 'mittwoch',
@@ -871,6 +935,16 @@
             'afternoon': 'nachmittag',
             'evening': 'abend',
             'night': 'nacht'
+        };
+
+        // English number words to numbers
+        const englishNumberWords = {
+            'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+            'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
+            'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14, 'fifteen': 15,
+            'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19,
+            'twenty': 20, 'thirty': 30, 'forty': 40, 'fifty': 50, 'sixty': 60,
+            'seventy': 70, 'eighty': 80, 'ninety': 90
         };
 
         // Custom items storage
@@ -953,11 +1027,21 @@
         function createNumberCard(item, isCustom) {
             const card = document.createElement('div');
             card.className = `card ${isCustom ? 'custom-item' : ''}`;
+            
+            let title, subtitle;
+            if (isCustom) {
+                title = item.english || item.text;
+                subtitle = item.german;
+            } else {
+                title = item.number;
+                subtitle = item.german;
+            }
+            
             card.innerHTML = `
                 ${isCustom ? '<button class="remove-btn" data-index="' + customNumberItems.indexOf(item) + '" data-type="numbers"><i class="fas fa-times"></i></button>' : ''}
-                <h3>${item.number || item.text}</h3>
-                <p>${item.german || ''}</p>
-                <button class="play-btn" data-text="${item.german || item.text}" data-type="numbers">
+                <h3>${title}</h3>
+                <p>${subtitle}</p>
+                <button class="play-btn" data-text="${subtitle}" data-type="numbers">
                     <i class="fas fa-play"></i>
                 </button>
             `;
@@ -1216,21 +1300,25 @@
 
         // Add custom number item
         function addCustomNumberItem() {
-            const input = document.getElementById('numbers-input');
-            const text = input.value.trim();
+            const englishInput = document.getElementById('english-number-input');
+            const germanOutput = document.getElementById('german-number-output');
+            const english = englishInput.value.trim();
+            const german = germanOutput.value.trim();
             
-            if (!text) {
-                showNotification('Please enter a number', 'error');
+            if (!english || !german) {
+                showNotification('Please enter a number and generate German translation', 'error');
                 return;
             }
             
             customNumberItems.push({
-                text: text,
-                german: text
+                english: english,
+                german: german
             });
             
             generateNumberCards();
-            input.value = '';
+            englishInput.value = '';
+            germanOutput.value = '';
+            document.getElementById('number-display').style.display = 'none';
             showNotification('Added to numbers list');
         }
 
@@ -1348,6 +1436,71 @@
             }, 800);
         }
 
+        // Translate English number to German
+        function translateEnglishNumberToGerman() {
+            const englishInput = document.getElementById('english-number-input');
+            const germanOutput = document.getElementById('german-number-output');
+            const englishText = englishInput.value.trim();
+            
+            if (!englishText) {
+                showNotification('Please enter a number to translate', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const translateBtn = document.getElementById('translate-number-btn');
+            const originalBtnContent = translateBtn.innerHTML;
+            translateBtn.innerHTML = '<span class="translation-loading"></span> Generating...';
+            translateBtn.disabled = true;
+            
+            // Simulate translation delay
+            setTimeout(() => {
+                let numberValue;
+                
+                // Check if input is a digit
+                if (/^\d+$/.test(englishText)) {
+                    numberValue = parseInt(englishText);
+                } else {
+                    // Convert English number words to numeric value
+                    const words = englishText.toLowerCase().split(' ');
+                    numberValue = 0;
+                    
+                    for (const word of words) {
+                        if (englishNumberWords[word]) {
+                            numberValue += englishNumberWords[word];
+                        }
+                    }
+                }
+                
+                // Validate number range
+                if (numberValue < 1 || numberValue > 99) {
+                    showNotification('Please enter a number between 1 and 99', 'error');
+                    translateBtn.innerHTML = originalBtnContent;
+                    translateBtn.disabled = false;
+                    return;
+                }
+                
+                // Get German translation
+                const germanText = getGermanNumber(numberValue);
+                germanOutput.value = germanText;
+                
+                // Show number display
+                const numberDisplay = document.getElementById('number-display');
+                const displayEnglish = document.getElementById('display-english');
+                const displayGerman = document.getElementById('display-german');
+                
+                displayEnglish.textContent = englishText;
+                displayGerman.textContent = germanText;
+                numberDisplay.style.display = 'flex';
+                
+                // Reset button
+                translateBtn.innerHTML = originalBtnContent;
+                translateBtn.disabled = false;
+                
+                showNotification('German number generated');
+            }, 800);
+        }
+
         // PWA Installation
         let deferredPrompt;
         const installBanner = document.getElementById('install-banner');
@@ -1459,9 +1612,13 @@
                 addCustomPhraseItem();
             }
             
-            // Translate button
+            // Translate buttons
             if (e.target.closest('#translate-btn')) {
                 translateEnglishToGerman();
+            }
+            
+            if (e.target.closest('#translate-number-btn')) {
+                translateEnglishNumberToGerman();
             }
             
             // Remove buttons
@@ -1478,8 +1635,8 @@
             if (e.key === 'Enter') {
                 if (e.target.id === 'alphabet-input') {
                     addCustomAlphabetItem();
-                } else if (e.target.id === 'numbers-input') {
-                    addCustomNumberItem();
+                } else if (e.target.id === 'english-number-input') {
+                    translateEnglishNumberToGerman();
                 } else if (e.target.id === 'english-input') {
                     translateEnglishToGerman();
                 }
@@ -1510,4 +1667,3 @@
     </script>
 </body>
 </html>
-
